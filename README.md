@@ -17,6 +17,12 @@ Shopping list app
 * ToDo:
 	- convert styles' measurements to percentage
 	- compare mobile view to webview
-	- add 'clear()' function
+	- give each item an ID (incorporate it when sending them as object to ItemList)
+	- ~add 'clear()' function~ clear list after everything is complete
+		- items that are touched should cross the words to show completion
+		- items that were bellow now show up above uncrossed items, when crossed
+		- when crossed item is pressed, it uncrossed
+		-  when all items crossed, show a message then clear items
 	- make better logo
 	-  
+

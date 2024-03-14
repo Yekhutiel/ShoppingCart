@@ -10,20 +10,15 @@ const ItemList = ({data}) => {
 
     return (
 
-        <ScrollView >
+        <ScrollView id={'scrollView'}>
 
-            <View style={styles.cartContainer}>
+            <View style={styles.cartContainer} id={'data-container'}>
                 {data.map((item, index) => (
-                    <View key={index} style={[styles.cartItem, numberOfItems === 1 ? {width: 300} : {width: 150,}]}>
+                    <View key={index} style={[styles.cartItem, numberOfItems === 1 ? {width: 300} : {width: 150,}]} id={'item'}>
                         <Text style={{ alignSelf: 'center' }}>{item.text}</Text>
                     </View>
                 ))}
             </View>
-
-            {/* render Flatlist of above template / might not need
-        <FlatList data={data} renderItem={renderListItem} horizontal={true} style={{ width: '90%',}} />
-        */
-            }
         </ScrollView>
 
     );

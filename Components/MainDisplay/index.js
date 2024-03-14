@@ -89,12 +89,12 @@ const MainDisplay = (props) => {
     }
 }
     return (
-        <View style={styles.container}>
-            <View style={styles.imageContainer}>
+        <View style={styles.container} id={'container-MainDisplay'}>
+            <View style={styles.imageContainer} id={'img-container'}>
                 <Image style={styles.image} source={require('./../../assets/Media/Cart.png')}/>
             </View>
 
-            <TextInput
+            <TextInput id={'user-input'}
                 placeholder={'Type here ...'}
                 value={text}
                 onChangeText={text => handleText(text)}
@@ -107,7 +107,7 @@ const MainDisplay = (props) => {
                 }}
             />
 
-            <Pressable style={{
+            <Pressable id={'button'} style={{
                 borderRadius: 15, overflow: 'hidden', backgroundColor: '#c02e2e',
                 position: 'absolute', top: 360, width: 300, height: 60, alignItems: 'center',
                 justifyContent: 'center',
@@ -116,7 +116,7 @@ const MainDisplay = (props) => {
             </Pressable>
 
             <View
-
+                id={'result-container'}
                 // style to add `justifyContent: 'Top'`
                 style={[
                     styles.resultContainer,

@@ -12,3 +12,11 @@ Shopping list app
 	
 	3. create ItemList component:
 		- will render each element of the cart in a list format
+
+
+* ToDo:
+	- convert styles' measurements to percentage
+	- compare mobile view to webview
+	- add 'clear()' function
+	- make better logo
+	-  

@@ -19,17 +19,51 @@ const MainDisplay = (props) => {
     const [text, setText] = useState('');
     const [cartItems, setCartItems] = useState([])
 
+    // Define a state variable to track the last assigned item ID
+    const [lastItemId, setLastItemId] = useState(0);
+
     ///// functions
 
-    // empty cart
-    const doneWithCart = () => {
-        // delete entire array
+    //code to change `crossedOut` of a specified item
+    const handleFromChild = (data) => {
+
+        // Find the index of the carItem with the given ID
+        const itemIndex = cartItems.findIndex(item => item.id === data);
+
+
+        if (itemIndex !== -1) {
+            // Create a copy of the items array
+            const updatedItems = [...cartItems];
+
+            if(updatedItems[itemIndex].crossedOut === true) {
+                // Update the "crossedOut" property of the item at the found index
+                updatedItems[itemIndex] = {
+                    ...updatedItems[itemIndex],
+                    crossedOut: false
+                };
+            }else{
+                // Update the "crossedOut" property of the item at the found index
+                updatedItems[itemIndex] = {
+                    ...updatedItems[itemIndex],
+                    crossedOut: true
+                };
+            }
+
+            setCartItems(updatedItems);
+        }
+
     }
 
     // handle text input
     const handleText = (text) => {
         setText(text);
     }
+
+    // Function to generate a new unique item ID
+    const generateItemId = () => {
+        setLastItemId(prevId => prevId + 1);
+        return lastItemId;
+    };
 
     // record text input to array and asyncstorage
     const receiveInput = (text) => {
@@ -38,7 +72,9 @@ const MainDisplay = (props) => {
             alert('You did not write anything!!!')
             setText('');
         } else {
-            setCartItems(prevCartItems => [...prevCartItems, {text}]);
+
+            const newItem = { text, id: generateItemId(), crossedOut: false };
+            setCartItems(prevCartItems => [...prevCartItems, newItem]);
 
             storeData(cartItems)
                 .then(() => {
@@ -123,7 +159,7 @@ const MainDisplay = (props) => {
                     cartItems.length !== 0 ? { justifyContent: 'flex-start' } : { justifyContent: 'middle' }]}
             >
                 {
-                    cartItems.length !== 0 ? <ItemList data={cartItems}/> :
+                    cartItems.length !== 0 ? <ItemList data={cartItems} sendToParent={handleFromChild}/> :
                         <View
                             style={{
                                 position: 'absolute', width: '80%', height: '80%',

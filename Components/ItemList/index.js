@@ -1,12 +1,14 @@
 import {FlatList, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {useState} from "react";
 
-const ItemList = ({data}) => {
+const ItemList = ({data, sendToParent}) => {
     // data
     const numberOfItems = Object.entries(data).length;
-    console.log(numberOfItems);
 
-
+    // functions
+    const itemPressed = (itemID) => {
+        sendToParent(itemID);
+    }
 
     return (
 
@@ -14,9 +16,12 @@ const ItemList = ({data}) => {
 
             <View style={styles.cartContainer} id={'data-container'}>
                 {data.map((item, index) => (
-                    <View key={index} style={[styles.cartItem, numberOfItems === 1 ? {width: 300} : {width: 150,}]} id={'item'}>
-                        <Text style={{ alignSelf: 'center' }}>{item.text}</Text>
-                    </View>
+                    <Pressable
+                        key={index}
+                        onPress={() => itemPressed(item.id)}
+                        style={[styles.cartItem, numberOfItems === 1 ? {width: 300} : {width: 150,}]} id={'item'}>
+                        <Text style={[styles.Text, item.crossedOut && styles.crossedOut]}>{item.text}</Text>
+                    </Pressable>
                 ))}
             </View>
         </ScrollView>
@@ -46,6 +51,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
+    },
+    Text: {
+        alignSelf: 'center',
+    },
+    crossedOut: {
+        textDecorationLine: 'line-through',
     }
 
 })

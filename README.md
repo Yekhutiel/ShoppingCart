@@ -1,28 +1,14 @@
 # ShoppingCart
 Shopping list app
 
-* this app uses AsyncStorage to save shopping list for offline use
+Using this shopping cart application, you will never again forget that one thing you really need to get
+but cannot rember.
+Write everything you need to get from the store or mall, from laptop to juicy tomatoes.
+Who knows, you can remember to buy that pair of shoes you wanted to gift to you loved one.
 
-* steps: 
-	1. create main display:
-		- will hold other components and such necessary details
-		- is where user will interact
+* this is a react native app inspired by Rafid Hoda's Firebase app.
 
-	2. add variables and asyncstorage functions
-	
-	3. create ItemList component:
-		- will render each element of the cart in a list format
+* His youtube video: https://www.youtube.com/watch?v=UFD4SP91tSM&list=PLkgaChpeEVestaW5U8Lk-9n-uSt_Yr8Kh&index=18&t=1145s 
 
 
-* ToDo:
-	- convert styles' measurements to percentage
-	- compare mobile view to webview
-	- ~ give each item an ID (incorporate it when sending them as object to ItemList) ~
-	- ~ add 'clear()' function ~ clear list after everything is complete
-		- items that are touched should cross the words to show completion
-		- items that were bellow now show up above uncrossed items, when crossed
-		- when crossed item is pressed, it uncrossed
-		-  when all items crossed, show a message then clear items
-	- make better logo
-	-  
 

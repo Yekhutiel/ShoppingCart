@@ -24,5 +24,10 @@ Shopping list app
 		- ~ when crossed item is pressed, it uncrossed ~
 		- when all items crossed, show a message then clear items
 	- make better logo
-	-  
 
+* Ideas:
+	- let MainDisplay deal with all the item attributes (crossedOut), and just send the updated array to ItemList (update the state from parent)
+	
+* Issues:
+	- amount of crossed items is inconsistent
+	- glitch in clicking an item

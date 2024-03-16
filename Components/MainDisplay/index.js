@@ -17,76 +17,14 @@ import ItemList from "../ItemList";
 const MainDisplay = (props) => {
     // data and hooks
     const [text, setText] = useState('');
-    const [cartItems, setCartItems] = useState([])
+    const [cartItems, setCartItems] = useState([]);
+    const [firstLoad, setFirstLoad] = useState(true);
 
     // Define a state variable to track the last assigned item ID
     const [lastItemId, setLastItemId] = useState(0);
 
-    ///// functions
-
-    //code to change `crossedOut` of a specified item
-    const handleFromChild = (data) => {
-
-        // Find the index of the carItem with the given ID
-        const itemIndex = cartItems.findIndex(item => item.id === data);
-
-
-        if (itemIndex !== -1) {
-            // Create a copy of the items array
-            const updatedItems = [...cartItems];
-
-            if(updatedItems[itemIndex].crossedOut === true) {
-                // Update the "crossedOut" property of the item at the found index
-                updatedItems[itemIndex] = {
-                    ...updatedItems[itemIndex],
-                    crossedOut: false
-                };
-            }else{
-                // Update the "crossedOut" property of the item at the found index
-                updatedItems[itemIndex] = {
-                    ...updatedItems[itemIndex],
-                    crossedOut: true
-                };
-            }
-
-            setCartItems(updatedItems);
-        }
-
-    }
-
-    // handle text input
-    const handleText = (text) => {
-        setText(text);
-    }
-
-    // Function to generate a new unique item ID
-    const generateItemId = () => {
-        setLastItemId(prevId => prevId + 1);
-        return lastItemId;
-    };
-
-    // record text input to array and asyncstorage
-    const receiveInput = (text) => {
-
-        if(text === undefined){
-            alert('You did not write anything!!!')
-            setText('');
-        } else {
-
-            const newItem = { text, id: generateItemId(), crossedOut: false };
-            setCartItems(prevCartItems => [...prevCartItems, newItem]);
-
-            storeData(cartItems)
-                .then(() => {
-                    console.log('Data saved successfully!');
-                })
-                .catch((error) => {
-                    console.log('Error saving data: ', error);
-                });
-
-            setText('');
-        }
-    }
+    // keeping track of crossed items
+    const [crossedItems, setCrossedItems] = useState(0);
 
     // load from AsyncStorage
     useEffect(() => {
@@ -97,7 +35,120 @@ const MainDisplay = (props) => {
             .catch((e) => {
                 console.log('Error: ', e)
             })
+
+        setFirstLoad(false);
     }, []);
+
+    useEffect(() => {
+        // test
+        console.log('useRffect of  clearCart() called\n...')
+
+        if (crossedItems === cartItems.length && firstLoad === false) {
+            clearCart();
+
+            // test
+            console.log('clearCart in useEffeect called\n...')
+        }
+    }, [crossedItems]);
+
+    useEffect(() => {
+        setCrossedItems(cartItems.filter(item => item.crossedOut).length);
+
+        // test 
+        console.log('setCrossedItems called\n...')
+    }, [cartItems]);
+
+    // store data to async
+    useEffect(() => {
+
+        storeData(cartItems)
+        .then(() => {
+            console.log('Data saved successfully!');
+        })
+        .catch((error) => {
+            console.log('Error saving data: ', error);
+        });
+
+    }, [cartItems])
+
+
+    ///// functions
+
+    //code to change `crossedOut` of a specified item
+    const handleFromChild = (data) => {
+
+        // test
+        console.log('handleFromChild called called, itemID: ', data);
+
+        // Find the index of the carItem with the given ID
+        const itemIndex = cartItems.findIndex(item => item.id === data);
+
+        // test
+        console.log(`~MainDisplay  itemIndex: ${itemIndex}`);
+        console.log('~cartItem data: ', cartItems);
+
+        if (itemIndex !== -1) {
+            // Create a copy of the items array
+            const updatedItems = [...cartItems];
+            console.log('updatedItems: ', updatedItems);
+
+            // Update the "crossedOut" property of the item at the found index
+            updatedItems[itemIndex] = {
+                ...updatedItems[itemIndex],
+                crossedOut: !updatedItems[itemIndex].crossedOut
+            };
+
+            setCartItems(updatedItems);
+            // setCrossedItems(updatedItems.filter(item => item.crossedOut).length);
+            // test
+            console.log(`crossedItems: ${crossedItems} \nnumber of items: ${cartItems.length}`)
+        }
+    }
+
+    // clear cart
+    const clearCart = () => {
+        // clear array
+        setCartItems([]);
+
+        // clear asyncstorage
+        clearAsync()
+            .then(() => {
+                alert('You are done shopping!!!')
+            })
+            .catch((e) =>{
+                console.log('Error clearing storage: ', e)
+            })
+    }
+
+    // handle text input
+    const handleText = (text) => {
+        setText(text);
+    }
+
+    // record text input to array and asyncstorage
+    const receiveInput = (text) => {
+
+        if(text === undefined || !text.trim()){
+            alert('Please writing something')
+            setText('');
+        } else {
+
+            const newItem = { text, id: cartItems.length, crossedOut: false };
+            setCartItems(prevCartItems => [...prevCartItems, newItem]);
+
+            /*
+            storeData(cartItems)
+            .then(() => {
+                console.log('Data saved successfully!');
+            })
+            .catch((error) => {
+                console.log('Error saving data: ', error);
+            });
+            */
+
+            setText('');
+        }
+    }
 
     ///// asyncstorage functions
 
@@ -113,17 +164,25 @@ const MainDisplay = (props) => {
     // load from storage
     const getData = async () => {
         try{
-            AsyncStorage.getItem('items')
-                .then(value => {
-                    if (value != null){
-                        const tempVar  = JSON.parse(value);
-                        cartItems.push(...tempVar);
-                    }
-                })
+            const value = await  AsyncStorage.getItem('shoppingCart');
+            if(value !==null) {
+                const tempVar = JSON.parse(value);
+                setCartItems(tempVar);
+                setCrossedItems(tempVar.filter(item => item.crossedOut).length);
+            }
         } catch (e) {
-        console.log(e)
+            console.log('Error loading getting data: ', e)
+        }
     }
-}
+
+    // clear async
+    const clearAsync = async () => {
+        try {
+            await AsyncStorage.removeItem('shoppingCart');
+        } catch (e) {
+            console.log('Error clearing storage: ', e);
+        }
+    }
     return (
         <View style={styles.container} id={'container-MainDisplay'}>
             <View style={styles.imageContainer} id={'img-container'}>

@@ -195,16 +195,16 @@ const MainDisplay = (props) => {
                 onChangeText={text => handleText(text)}
 
                 style={{
-                    position: 'absolute',
-                    top: 290, backgroundColor: '#bbbaba',
-                    width: 300, height: 60, textAlign: 'center',
+                    position: 'absolute', top: '33%',
+                    backgroundColor: '#bbbaba',
+                    width: '80%', height: '8%', textAlign: 'center',
                     borderRadius: 15
                 }}
             />
 
             <Pressable id={'button'} style={{
                 borderRadius: 15, overflow: 'hidden', backgroundColor: '#c02e2e',
-                position: 'absolute', top: 360, width: 300, height: 60, alignItems: 'center',
+                position: 'absolute', top: '42%', width: '80%', height: '8%', alignItems: 'center',
                 justifyContent: 'center',
             }} onPress={() => receiveInput(text)}>
                 <Text style={{ color: 'white', paddingHorizontal: 5}}>ADD TO CART</Text>
@@ -214,8 +214,7 @@ const MainDisplay = (props) => {
                 id={'result-container'}
                 // style to add `justifyContent: 'Top'`
                 style={[
-                    styles.resultContainer,
-                    cartItems.length !== 0 ? { justifyContent: 'flex-start' } : { justifyContent: 'middle' }]}
+                    styles.resultContainer]}
             >
                 {
                     cartItems.length !== 0 ? <ItemList data={cartItems} sendToParent={handleFromChild}/> :

@@ -10,9 +10,9 @@ const styles = StyleSheet.create({
             justifyContent: 'center',
         },
         imageContainer:{
-            position: "absolute",
-            top: 70,
-            right: 100,
+            position: "absolute", 
+            top: '10%',
+            
 
             width: 200,
             height: 200,
@@ -22,10 +22,11 @@ const styles = StyleSheet.create({
             height: '100%',
         },
     resultContainer: {
+
         position: 'absolute',
-        top: 450,
-        width: '100%',
-        height: 280,
+        top: '53%',
+        width: '86%',
+        height: '45%',
         alignItems: 'center',
         alignContent: 'center',
     }

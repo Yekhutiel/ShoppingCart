@@ -19,7 +19,8 @@
     "react-native": "0.73.4",
     "react-native-cli": "^2.0.1",
     "react-native-fs": "^2.20.0",
-    "react-native-web": "^0.19.10"
+    "react-native-web": "^0.19.10",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

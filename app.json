@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "ShoppingCart",
+    "name": "Shopping Cart",
     "slug": "ShoppingCart",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/ic_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/ic_launcher.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/ic_icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.yekhutiel.ShoppingCart"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c64f7807-94e0-4acd-8f65-e5df46fd0628"
+      }
     }
   }
 }

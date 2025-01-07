@@ -6,9 +6,6 @@ but cannot rember.
 Write everything you need to get from the store or mall, from laptop to juicy tomatoes.
 Who knows, you can remember to buy that pair of shoes you wanted to gift to you loved one.
 
-* this is a react native app inspired by Rafid Hoda's Firebase app.
-
-* His youtube video: https://www.youtube.com/watch?v=UFD4SP91tSM&list=PLkgaChpeEVestaW5U8Lk-9n-uSt_Yr8Kh&index=18&t=1145s 
 
 
 

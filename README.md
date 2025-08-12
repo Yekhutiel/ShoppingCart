@@ -56,3 +56,8 @@ Questy Kuti (yekhutiel) |
     * See [commit change]() or See [release history]()
 * 0.1
     * Initial Release
+
+## Acknowledgments
+
+Inspiration, code snippets, etc.
+* [Mobile App by Kevin Powell](https://scrimba.com/build-a-mobile-app-with-firebase-c0g)

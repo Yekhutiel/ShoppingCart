@@ -5,9 +5,6 @@ Shopping Cart application
 ## Description
 
 This is a shopping cart application aimed at digitalising and automate shopping lists.
-* this is a react native app inspired by Rafid Hoda's Firebase app.
-
-* His youtube video: https://www.youtube.com/watch?v=UFD4SP91tSM&list=PLkgaChpeEVestaW5U8Lk-9n-uSt_Yr8Kh&index=18&t=1145s 
 
 ## Getting Started
 
